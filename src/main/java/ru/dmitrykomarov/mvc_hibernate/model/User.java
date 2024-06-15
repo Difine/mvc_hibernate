@@ -6,14 +6,26 @@
 
 package ru.dmitrykomarov.mvc_hibernate.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+
+    @Column(name = "name")
     String name;
+
+    @Column(name = "lastname")
     String lastName;
 
-    public User(long id, String lastName, String name) {
-        this.id = id;
+    public User() {
+    }
+
+    public User(String lastName, String name) {
         this.lastName = lastName;
         this.name = name;
     }

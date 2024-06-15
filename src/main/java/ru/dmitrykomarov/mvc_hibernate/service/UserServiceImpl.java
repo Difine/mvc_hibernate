@@ -8,12 +8,14 @@ package ru.dmitrykomarov.mvc_hibernate.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.dmitrykomarov.mvc_hibernate.dao.UserDao;
 import ru.dmitrykomarov.mvc_hibernate.model.User;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService{
 
     private UserDao userDao;
@@ -30,5 +32,11 @@ public class UserServiceImpl implements UserService{
 
     public User getUserById(long id) {
         return userDao.getUserById(id);
+    }
+
+    @Transactional
+    @Override
+    public void saveUser(User user) {
+        userDao.saveUser(user);
     }
 }

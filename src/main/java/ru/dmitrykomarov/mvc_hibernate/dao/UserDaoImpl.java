@@ -6,6 +6,9 @@
 
 package ru.dmitrykomarov.mvc_hibernate.dao;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.dmitrykomarov.mvc_hibernate.model.User;
 
@@ -15,19 +18,25 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    private List<User> userList;
-    {
-        userList = new ArrayList<>();
-        userList.add(new User(1, "Vika", "Karter"));
-        userList.add(new User(2, "Kir", "Rrr"));
-        userList.add(new User(3, "Roms", "Kder"));
+    private EntityManager entityManager;
+
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
+
     public List<User> getAllUsers() {
-        return userList;
+        return entityManager.createQuery("from User", User.class).getResultList();
     }
 
     public User getUserById(long id) {
-        return userList.stream().filter(user -> user.getId() == id).findAny().orElse(null);
+        return null;
+    }
+
+    @Override
+    public void saveUser (User user) {
+        entityManager.persist(user);
+        entityManager.flush();
     }
 }
