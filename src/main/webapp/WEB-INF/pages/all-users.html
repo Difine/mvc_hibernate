@@ -5,30 +5,30 @@
     <title>All users</title>
 </head>
 <body>
-    <div class="hero">
-        <h1 class="title">All user from Database</h1>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Operations</th>
-            </tr>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.getName()}"></td>
-                <td th:text="${user.getLastName()}"></td>
-                <td>
-                    <a th:href="@{/users/update(id=${user.id})}">
-                        <button type="button"> Update user </button>
-                    </a>
-                    <a th:href="@{/users/delete(id=${user.id})}">
-                        <button type="button"> Delete user </button>
-                    </a>
-                </td>
-            </tr>
-        </table>
-        <button type="button" onclick="window.location.href = '/users/new'">Add user</button>
+<div class="hero">
+    <h1 class="title">All user from Database</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Operations</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getLastName()}"></td>
+            <td>
+                <a th:href="@{/users/update(id=${user.id})}">
+                    <button type="button"> Update user</button>
+                </a>
+                <a th:href="@{/users/delete(id=${user.id})}">
+                    <button type="button"> Delete user</button>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <button type="button" onclick="window.location.href = '/users/new'">Add user</button>
 
-    </div>
+</div>
 <!-- /.hero -->
 </body>
 </html>

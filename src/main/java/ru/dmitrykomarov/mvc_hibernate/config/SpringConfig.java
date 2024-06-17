@@ -1,9 +1,3 @@
-/*
- * @author Dmitry Komarov
- * Created 14.06.2024
- */
-
-
 package ru.dmitrykomarov.mvc_hibernate.config;
 
 import org.springframework.beans.factory.annotation.Autowired;

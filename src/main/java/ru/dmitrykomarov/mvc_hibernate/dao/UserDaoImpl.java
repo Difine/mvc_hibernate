@@ -1,9 +1,3 @@
-/*
- * @author Dmitry Komarov
- * Created 15.06.2024
- */
-
-
 package ru.dmitrykomarov.mvc_hibernate.dao;
 
 import jakarta.persistence.EntityManager;
@@ -25,23 +19,29 @@ public class UserDaoImpl implements UserDao {
         this.entityManager = entityManager;
     }
 
+    @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("from User", User.class).getResultList();
     }
 
+    @Override
     public User getUserById(long id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
-    public void saveUser (User user) {
-        entityManager.merge(user);
-        entityManager.flush();
+    public void saveUser(User user) {
+        entityManager.persist(user);
     }
 
     @Override
     public void deleteUser(long id) {
         entityManager.createQuery("delete from User where id=:id").setParameter("id", id).executeUpdate();
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 
 

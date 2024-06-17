@@ -1,9 +1,3 @@
-/*
- * @author Dmitry Komarov
- * Created 15.06.2024
- */
-
-
 package ru.dmitrykomarov.mvc_hibernate.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +25,7 @@ public class UsersController {
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
+    public String showCreateUser(Model model) {
         model.addAttribute("user", new User());
         return "add-user";
     }
@@ -43,20 +37,22 @@ public class UsersController {
     }
 
     @GetMapping("/update")
-    public String updateUser(@RequestParam("id") long id, Model model) {
+    public String showUpdateUser(@RequestParam("id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
+        return "update-user";
+    }
 
-        return "add-user";
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
+        return "redirect:/users";
     }
 
     @GetMapping("/delete")
     public String deleteUser(@RequestParam("id") long id) {
-
         userService.deleteUser(id);
-        System.out.println("hello");
         return "redirect:/users";
     }
-
 
 
 }

@@ -1,9 +1,3 @@
-/*
- * @author Dmitry Komarov
- * Created 15.06.2024
- */
-
-
 package ru.dmitrykomarov.mvc_hibernate.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
 
@@ -25,11 +19,12 @@ public class UserServiceImpl implements UserService{
         this.userDao = userDao;
     }
 
-
+    @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
+    @Override
     public User getUserById(long id) {
         return userDao.getUserById(id);
     }
@@ -44,5 +39,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(long id) {
         userDao.deleteUser(id);
+    }
+
+    @Transactional
+    @Override
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 }
